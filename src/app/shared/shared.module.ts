@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TuiTableModule, TuiTablePaginationModule } from '@taiga-ui/addon-table';
-import { TuiRootModule, TuiDialogModule, TuiAlertModule, TuiButtonModule, TuiErrorModule } from '@taiga-ui/core';
+import {
+  TuiRootModule,
+  TuiDialogModule,
+  TuiAlertModule,
+  TuiButtonModule,
+  TuiErrorModule,
+  TuiLinkModule,
+} from '@taiga-ui/core';
 import {
   TuiInputModule,
   TuiInputPasswordModule,
@@ -17,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     ReactiveFormsModule,
     TuiRootModule,
+    TuiLinkModule,
     TuiDialogModule,
     TuiAlertModule,
     TuiButtonModule,

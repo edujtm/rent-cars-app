@@ -17,7 +17,6 @@ export interface RegisterFormData {
   styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent {
-  @Input() title?: string;
   @Output() submit = new EventEmitter<RegisterFormData>();
 
   @Input() submitErrors: string | null = null;

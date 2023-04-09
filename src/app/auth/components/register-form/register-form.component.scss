@@ -1,5 +1,14 @@
 :host tui-island {
   min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  a {
+    display: block;
+    text-align: center;
+    margin: 10px 0px;
+  }
 
   form {
     display: grid;

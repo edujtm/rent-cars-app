@@ -13,7 +13,6 @@ export interface LoginFormData {
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
-  @Input() title?: string;
   @Output() submit = new EventEmitter<LoginFormData>();
 
   @Input() submitErrors: string | null = null;

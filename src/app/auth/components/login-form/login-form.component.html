@@ -1,5 +1,5 @@
 <tui-island>
-  <p class="title">{{ title }}</p>
+  <p class="title">Log in</p>
 
   <form [formGroup]="loginForm">
     <div class="username">
@@ -15,4 +15,6 @@
     <button class="submit-button" tuiButton type="button" (click)="onSubmit()">Login</button>
     <tui-error [error]="submitErrors"></tui-error>
   </form>
+
+  <a tuiLink [routerLink]="'register'">Don't have account? create a new one.</a>
 </tui-island>
