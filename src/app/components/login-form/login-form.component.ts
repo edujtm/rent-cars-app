@@ -1,5 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AppValidators } from 'src/app/core/utils/validators';
+
+export interface LoginFormData {
+  username: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-login-form',
@@ -8,9 +14,19 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class LoginFormComponent {
   @Input() title?: string;
-  @Output() submit = new EventEmitter<void>();
+  @Output() submit = new EventEmitter<LoginFormData>();
+
+  @Input() submitErrors: string | null = null;
+
+  loginForm = this.formBuilder.group({
+    username: ['', [AppValidators.required('Username')]],
+    password: ['', [AppValidators.required('Password')]],
+  });
+
+  constructor(private formBuilder: FormBuilder) {}
 
   onSubmit() {
-    this.submit.next();
+    const values = this.loginForm.value as LoginFormData;
+    this.submit.next(values);
   }
 }

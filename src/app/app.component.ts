@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginFormData } from './components/login-form/login-form.component';
 import { RegisterFormData } from './components/register-form/register-form.component';
 
 @Component({
@@ -9,8 +10,8 @@ import { RegisterFormData } from './components/register-form/register-form.compo
 export class AppComponent {
   title = 'rent-cars-app';
 
-  onLogin() {
-    console.log('Login form was submitted');
+  onLogin(loginData: LoginFormData) {
+    console.log('Login form was submitted', loginData);
   }
 
   onRegister(formData: RegisterFormData) {

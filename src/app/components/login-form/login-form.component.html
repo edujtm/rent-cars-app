@@ -1,17 +1,18 @@
 <tui-island>
   <p class="title">{{ title }}</p>
 
-  <form>
+  <form [formGroup]="loginForm">
     <div class="username">
-      <tui-input>Username</tui-input>
-      <tui-error></tui-error>
+      <tui-input formControlName="username">Username</tui-input>
+      <tui-error formControlName="username" [error]="[] | tuiFieldError | async"></tui-error>
     </div>
 
     <div class="password">
-      <tui-input-password>Password</tui-input-password>
-      <tui-error></tui-error>
+      <tui-input-password formControlName="password">Password</tui-input-password>
+      <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
     </div>
 
     <button class="submit-button" tuiButton type="button" (click)="onSubmit()">Login</button>
+    <tui-error [error]="submitErrors"></tui-error>
   </form>
 </tui-island>
