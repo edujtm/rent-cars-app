@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppValidators } from 'src/app/core/utils/validators';
+import { environment } from 'src/environments/environment';
 
 export interface RegisterFormData {
   firstName: string;
@@ -19,7 +22,7 @@ export interface RegisterFormData {
 export class RegisterFormComponent {
   @Output() submit = new EventEmitter<RegisterFormData>();
 
-  @Input() submitErrors: string | null = null;
+  submitErrors: string | null = null;
 
   /*
   registerForm = new FormGroup({
@@ -41,10 +44,20 @@ export class RegisterFormComponent {
     phoneNumber: ['', [AppValidators.required('Phone number')]],
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {}
 
   onSubmit() {
     const values = this.registerForm.value as RegisterFormData;
+
+    const body = { ...values, roles: ['Customer'] };
+    this.http.post(`${environment.apiUrl}/authentication`, body).subscribe({
+      next: (_) => {
+        this.router.navigate(['../']);
+      },
+      error: (err) => {
+        this.submitErrors = 'Something wrong occurred while registering account';
+      },
+    });
     this.submit.next(values);
   }
 }
