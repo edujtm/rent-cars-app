@@ -1,34 +1,47 @@
 <tui-island>
   <p class="title">{{ title }}</p>
-  <tui-input class="first-name">
-    First Name
-    <input tuiTextfield type="text" />
-  </tui-input>
+  <form [formGroup]="registerForm">
+    <tui-input class="first-name">
+      First Name
+      <input tuiTextfield type="text" formControlName="firstName" />
+    </tui-input>
 
-  <tui-input class="last-name">
-    Last Name
-    <input tuiTextfield type="text" />
-  </tui-input>
+    <tui-input class="last-name">
+      Last Name
+      <input tuiTextfield type="text" formControlName="lastName" />
+    </tui-input>
 
-  <tui-input class="username">
-    Username
-    <input tuiTextfield type="text" />
-  </tui-input>
+    <div class="username">
+      <tui-input formControlName="username"> Username </tui-input>
+      <tui-error formControlName="username" [error]="[] | tuiFieldError | async"> </tui-error>
+    </div>
 
-  <tui-input-password class="password">
-    Password
-    <input tuiTextfield type="password" />
-  </tui-input-password>
+    <div class="password">
+      <tui-input-password formControlName="password"> Password </tui-input-password>
+      <tui-error formControlName="password" [error]="[] | tuiFieldError | async"> </tui-error>
+    </div>
 
-  <tui-input class="email">
-    Email
-    <input tuiTextfield type="text" />
-  </tui-input>
+    <div class="email">
+      <tui-input class="email" formControlName="email"> Email </tui-input>
+      <tui-error formControlName="email" [error]="[] | tuiFieldError | async"> </tui-error>
+    </div>
 
-  <tui-input-phone [countryCode]="'+55'" [phoneMaskAfterCountryCode]="'(##) #####-####'" class="phone-number">
-    Phone Number
-    <input tuiTextfield type="text" />
-  </tui-input-phone>
+    <div class="phone-number">
+      <tui-input-phone
+        [countryCode]="'+55'"
+        [phoneMaskAfterCountryCode]="'(##) #####-####'"
+        formControlName="phoneNumber"
+      >
+        Phone Number
+        <input tuiTextfield type="text" />
+      </tui-input-phone>
+      <tui-error formControlName="phoneNumber" [error]="[] | tuiFieldError | async"> </tui-error>
+    </div>
 
-  <button class="submit-button" tuiButton type="button" (click)="onSubmit()">Register</button>
+    <button class="submit-button" tuiButton type="button" (click)="onSubmit()">Register</button>
+
+    <div class="submit-errors">
+      <tui-error [error]="submitError"></tui-error>
+    </div>
+  </form>
 </tui-island>
