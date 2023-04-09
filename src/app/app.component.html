@@ -1,12 +1,3 @@
 <tui-root>
-  <div class="root">
-    <main class="main-section">
-      <div class="login-form">
-        <app-login-form [title]="'Log in'" (submit)="onLogin($event)"></app-login-form>
-      </div>
-      <div class="register-form">
-        <app-register-form [title]="'Create your account'" (submit)="onRegister($event)"></app-register-form>
-      </div>
-    </main>
-  </div>
+  <router-outlet></router-outlet>
 </tui-root>
