@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.payment-status {
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+
+  &:before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+    background: var(--tui-base-04);
+  }
+
+  &.paid:before {
+    background: var(--tui-success-fill);
+  }
+}

@@ -1,0 +1,25 @@
+<table tuiTable [columns]="columns">
+  <thead>
+    <tr tuiThGroup>
+      <th *tuiHead="'Start Date'" tuiTh>Start Date</th>
+
+      <th *tuiHead="'Final Date'" tuiTh>Final Date</th>
+      <th *tuiHead="'Status'" tuiTh>Status</th>
+      <th *tuiHead="'Payment Received'" tuiTh>Payment Received</th>
+      <th *tuiHead="'Fee'" tuiTh>Fee</th>
+    </tr>
+  </thead>
+  <tbody tuiTbody [data]="bookings">
+    <tr *ngFor="let booking of bookings; let index = index" tuiTr>
+      <td *tuiCell="'Start Date'" tuiTd>{{ booking.from | date : 'd/M/yy h:mm' }}</td>
+      <td *tuiCell="'Final Date'" tuiTd>{{ booking.to | date : 'd/M/yy h:mm' }}</td>
+      <td *tuiCell="'Status'" tuiTd>
+        {{ booking.status }}
+      </td>
+      <td *tuiCell="'Payment Received'" class="payment-status" [ngClass]="{ paid: booking.paymentReceived }" tuiTd>
+        {{ booking.paymentReceived }}
+      </td>
+      <td *tuiCell="'Fee'" tuiTd>{{ booking.totalFee }}</td>
+    </tr>
+  </tbody>
+</table>
