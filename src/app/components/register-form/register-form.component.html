@@ -1,0 +1,34 @@
+<tui-island>
+  <p class="title">{{ title }}</p>
+  <tui-input class="first-name">
+    First Name
+    <input tuiTextfield type="text" />
+  </tui-input>
+
+  <tui-input class="last-name">
+    Last Name
+    <input tuiTextfield type="text" />
+  </tui-input>
+
+  <tui-input class="username">
+    Username
+    <input tuiTextfield type="text" />
+  </tui-input>
+
+  <tui-input-password class="password">
+    Password
+    <input tuiTextfield type="password" />
+  </tui-input-password>
+
+  <tui-input class="email">
+    Email
+    <input tuiTextfield type="text" />
+  </tui-input>
+
+  <tui-input-phone [countryCode]="'+55'" [phoneMaskAfterCountryCode]="'(##) #####-####'" class="phone-number">
+    Phone Number
+    <input tuiTextfield type="text" />
+  </tui-input-phone>
+
+  <button class="submit-button" tuiButton type="button" (click)="onSubmit()">Register</button>
+</tui-island>

@@ -1,0 +1,27 @@
+:host tui-island {
+  min-width: 400px;
+  display: grid;
+  grid-template-areas:
+    'title title'
+    'first-name last-name'
+    'username username'
+    'password password'
+    'email email'
+    'phone-number phone-number'
+    'submit-button submit-button';
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
+  border-color: var(--color-accent);
+}
+
+.title {
+  text-align: center;
+}
+
+$form-sections: 'title', 'first-name', 'last-name', 'username', 'password', 'email', 'phone-number', 'submit-button';
+
+@each $section in $form-sections {
+  .#{$section} {
+    grid-area: #{$section};
+  }
+}

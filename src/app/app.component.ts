@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'rent-cars-app';
+
+  onSubmit() {
+    console.log('Form was submitted');
+  }
 }
