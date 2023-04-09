@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RegisterFormData } from './components/register-form/register-form.component';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
     console.log('Login form was submitted');
   }
 
-  onRegister() {
-    console.log('Register form was submitted');
+  onRegister(formData: RegisterFormData) {
+    console.log('Register form was submitted', formData);
   }
 }

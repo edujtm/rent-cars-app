@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, RegisterFormComponent, LoginFormComponent],
@@ -22,6 +23,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,

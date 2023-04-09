@@ -5,7 +5,7 @@
         <app-login-form [title]="'Log in'" (submit)="onLogin()"></app-login-form>
       </div>
       <div class="register-form">
-        <app-register-form [title]="'Create your account'" (submit)="onRegister()"></app-register-form>
+        <app-register-form [title]="'Create your account'" (submit)="onRegister($event)"></app-register-form>
       </div>
     </main>
   </div>
