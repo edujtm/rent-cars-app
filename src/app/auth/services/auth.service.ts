@@ -44,4 +44,9 @@ export class AuthService {
 
     return this.http.post(`${environment.apiUrl}/authentication`, body);
   }
+
+  logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+  }
 }
