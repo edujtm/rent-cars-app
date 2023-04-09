@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppValidators } from 'src/app/core/utils/validators';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../../services/auth.service';
 
 export interface LoginFormData {
   username: string;
@@ -25,18 +26,16 @@ export class LoginFormComponent {
     password: ['', [AppValidators.required('Password')]],
   });
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {}
 
   onSubmit() {
     const { username, password } = this.loginForm.value as LoginFormData;
-    const body = { password, userName: username };
 
-    this.http.post(`${environment.apiUrl}/authentication/login`, body).subscribe({
-      next: (data) => {
-        console.log('response: ', data);
+    this.authService.login({ password, userName: username }).subscribe({
+      next: (_) => {
         this.router.navigate(['/bookings']);
       },
-      error: (err) => {
+      error: (_) => {
         this.submitErrors = 'Something wrong ocurred while logging in';
       },
     });

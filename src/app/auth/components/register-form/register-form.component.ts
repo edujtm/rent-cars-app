@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AppValidators } from 'src/app/core/utils/validators';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../../services/auth.service';
 
 export interface RegisterFormData {
   firstName: string;
@@ -44,13 +45,12 @@ export class RegisterFormComponent {
     phoneNumber: ['', [AppValidators.required('Phone number')]],
   });
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {}
 
   onSubmit() {
     const values = this.registerForm.value as RegisterFormData;
 
-    const body = { ...values, roles: ['Customer'] };
-    this.http.post(`${environment.apiUrl}/authentication`, body).subscribe({
+    this.authService.registerUser(values).subscribe({
       next: (_) => {
         this.router.navigate(['../']);
       },
@@ -58,6 +58,5 @@ export class RegisterFormComponent {
         this.submitErrors = 'Something wrong occurred while registering account';
       },
     });
-    this.submit.next(values);
   }
 }
