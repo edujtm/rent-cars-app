@@ -1,0 +1,17 @@
+<tui-island>
+  <p class="title">{{ title }}</p>
+
+  <form>
+    <div class="username">
+      <tui-input>Username</tui-input>
+      <tui-error></tui-error>
+    </div>
+
+    <div class="password">
+      <tui-input-password>Password</tui-input-password>
+      <tui-error></tui-error>
+    </div>
+
+    <button class="submit-button" tuiButton type="button" (click)="onSubmit()">Login</button>
+  </form>
+</tui-island>

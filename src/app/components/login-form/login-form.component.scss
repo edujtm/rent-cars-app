@@ -1,0 +1,18 @@
+:host {
+  min-width: 400px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+  }
+}
+
+:host form > *:not(:first-child) {
+  margin-top: 8px;
+}
+
+.title {
+  text-align: center;
+}

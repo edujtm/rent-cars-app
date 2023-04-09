@@ -2,10 +2,10 @@
   <div class="root">
     <main class="main-section">
       <div class="login-form">
-        <p>Login form here</p>
+        <app-login-form [title]="'Log in'" (submit)="onLogin()"></app-login-form>
       </div>
       <div class="register-form">
-        <app-register-form [title]="'Create your account'" (submit)="onSubmit()"></app-register-form>
+        <app-register-form [title]="'Create your account'" (submit)="onRegister()"></app-register-form>
       </div>
     </main>
   </div>
