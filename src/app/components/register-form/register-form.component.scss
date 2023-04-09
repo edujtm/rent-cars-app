@@ -9,7 +9,8 @@
       'password password'
       'email email'
       'phone-number phone-number'
-      'submit-button submit-button';
+      'submit-button submit-button'
+      'submit-errors submit-errors';
     grid-template-rows: 1fr 1fr;
     grid-gap: 8px;
   }
@@ -19,7 +20,8 @@
   text-align: center;
 }
 
-$form-sections: 'first-name', 'last-name', 'username', 'password', 'email', 'phone-number', 'submit-button';
+$form-sections: 'first-name', 'last-name', 'username', 'password', 'email', 'phone-number', 'submit-button',
+  'submit-errors';
 
 @each $section in $form-sections {
   .#{$section} {

@@ -20,6 +20,8 @@ export class RegisterFormComponent {
   @Input() title?: string;
   @Output() submit = new EventEmitter<RegisterFormData>();
 
+  @Input() submitErrors: string | null = null;
+
   /*
   registerForm = new FormGroup({
     firstName: new FormControl(''),
