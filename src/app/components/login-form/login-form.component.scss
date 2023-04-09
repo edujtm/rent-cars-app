@@ -1,0 +1,15 @@
+:host tui-island {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+:host tui-island > *:not(:first-child) {
+  margin-top: 16px;
+}
+
+.title {
+  text-align: center;
+}
