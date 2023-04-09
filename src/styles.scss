@@ -5,6 +5,9 @@ body {
   padding: 0;
 }
 
-html {
+:root {
   --color-accent: #805ad5;
+  --color-hover: #450d98;
+  --tui-primary: var(--color-accent);
+  --tui-primary-hover: var(--color-hover);
 }
