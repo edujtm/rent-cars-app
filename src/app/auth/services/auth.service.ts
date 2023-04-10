@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   registerUser(data: RegisterUserData) {
-    const body = { ...data, roles: ['Customer'] };
+    const body = { ...data, roles: ['Manager'] };
 
     return this.http.post(`${environment.apiUrl}/authentication`, body);
   }
