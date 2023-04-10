@@ -1,3 +1,11 @@
+<tui-island class="customer-section">
+  <p>Select a customer:</p>
+  <tui-select [formControl]="selectedCustomer">
+    Customer
+    <input *tuiTextField placeholder="Choose a customer" />
+    <tui-data-list-wrapper *tuiDataList [items]="customers"> </tui-data-list-wrapper>
+  </tui-select>
+</tui-island>
 <table tuiTable [columns]="columns">
   <thead>
     <tr tuiThGroup>

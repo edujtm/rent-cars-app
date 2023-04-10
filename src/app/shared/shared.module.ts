@@ -8,6 +8,8 @@ import {
   TuiButtonModule,
   TuiErrorModule,
   TuiLinkModule,
+  TuiDataListModule,
+  TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import {
   TuiInputModule,
@@ -15,6 +17,8 @@ import {
   TuiInputPhoneModule,
   TuiIslandModule,
   TuiFieldErrorPipeModule,
+  TuiSelectModule,
+  TuiDataListWrapperModule,
 } from '@taiga-ui/kit';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -36,6 +40,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     TuiFieldErrorPipeModule,
     TuiTableModule,
     TuiTablePaginationModule,
+    TuiTextfieldControllerModule,
+    TuiSelectModule,
+    TuiDataListModule,
+    TuiDataListWrapperModule,
   ],
 })
 export class SharedModule {}

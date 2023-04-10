@@ -4,6 +4,20 @@
   align-items: stretch;
 }
 
+.customer-section {
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: row;
+
+  & > *:not(:first-child) {
+    margin-left: 16px;
+  }
+
+  tui-select {
+    min-width: 400px;
+  }
+}
+
 .payment-status {
   display: flex;
   align-items: center;

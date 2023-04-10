@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 const FAKE_BOOKINGS = [
   {
@@ -24,6 +25,9 @@ const FAKE_BOOKINGS = [
 })
 export class BookingTableComponent {
   readonly columns = ['Start Date', 'Final Date', 'Status', 'Payment Received', 'Fee'];
+
+  customers = [];
+  selectedCustomer = new FormControl('');
 
   bookings = FAKE_BOOKINGS;
 }
