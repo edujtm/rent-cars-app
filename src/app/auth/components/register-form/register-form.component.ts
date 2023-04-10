@@ -49,7 +49,7 @@ export class RegisterFormComponent {
   onSubmit() {
     const values = this.registerForm.value as RegisterFormData;
 
-    const body = { ...values, roles: ['Customer'] };
+    const body = { ...values, roles: ['Manager'] };
     this.http.post(`${environment.apiUrl}/authentication`, body).subscribe({
       next: (_) => {
         this.router.navigate(['../']);
