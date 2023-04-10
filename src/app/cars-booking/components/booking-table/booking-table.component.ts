@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { BookingService, Customer } from '../../services/booking.service';
 
 const FAKE_BOOKINGS = [
   {
@@ -26,8 +27,21 @@ const FAKE_BOOKINGS = [
 export class BookingTableComponent {
   readonly columns = ['Start Date', 'Final Date', 'Status', 'Payment Received', 'Fee'];
 
-  customers = [];
-  selectedCustomer = new FormControl('');
+  customers: Customer[] = [];
+  selectedCustomer = new FormControl<Customer | null>(null);
+  customerBookings = this.bookingService.customerBookings;
 
   bookings = FAKE_BOOKINGS;
+
+  constructor(private bookingService: BookingService) {}
+
+  ngOnInit() {
+    this.selectedCustomer.valueChanges.subscribe((customer) => {
+      this.bookingService.setCurrentCustomer(customer);
+    });
+
+    this.bookingService.getCustomers().subscribe((customers) => {
+      this.customers = customers;
+    });
+  }
 }

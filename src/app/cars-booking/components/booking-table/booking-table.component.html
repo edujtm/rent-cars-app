@@ -1,9 +1,13 @@
 <tui-island class="customer-section">
   <p>Select a customer:</p>
-  <tui-select [formControl]="selectedCustomer">
+  <tui-select [formControl]="selectedCustomer" [valueContent]="customerTemplate">
     Customer
     <input *tuiTextField placeholder="Choose a customer" />
-    <tui-data-list-wrapper *tuiDataList [items]="customers"> </tui-data-list-wrapper>
+    <tui-data-list-wrapper *tuiDataList [items]="customers" [itemContent]="customerTemplate"> </tui-data-list-wrapper>
+
+    <ng-template #customerTemplate let-customer>
+      <p>{{ customer.Name }} - {{ customer.Email }}</p>
+    </ng-template>
   </tui-select>
 </tui-island>
 <table tuiTable [columns]="columns">
@@ -17,8 +21,8 @@
       <th *tuiHead="'Fee'" tuiTh>Fee</th>
     </tr>
   </thead>
-  <tbody tuiTbody [data]="bookings">
-    <tr *ngFor="let booking of bookings; let index = index" tuiTr>
+  <tbody tuiTbody [data]="customerBookings | async">
+    <tr *ngFor="let booking of customerBookings | async; let index = index" tuiTr>
       <td *tuiCell="'Start Date'" tuiTd>{{ booking.from | date : 'd/M/yy h:mm' }}</td>
       <td *tuiCell="'Final Date'" tuiTd>{{ booking.to | date : 'd/M/yy h:mm' }}</td>
       <td *tuiCell="'Status'" tuiTd>
