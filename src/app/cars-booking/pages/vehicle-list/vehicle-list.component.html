@@ -23,7 +23,14 @@
               <th *tuiHead="'Rental Fee'" tuiTh>Rental Fee</th>
             </tr>
           </thead>
-          <tbody tuiTbody [data]="[]"></tbody>
+          <tbody tuiTbody [data]="(vehicles | async) ?? []">
+            <tr *ngFor="let vehicle of vehicles | async" tuiTr>
+              <td *tuiCell="'Model'" tuiTd>{{ vehicle.model }}</td>
+              <td *tuiCell="'Manufacturer'" tuiTd>{{ vehicle.manufacturer }}</td>
+              <td *tuiCell="'Mileage'" tuiTd>{{ vehicle.mileage }}</td>
+              <td *tuiCell="'Rental Fee'" tuiTd>{{ vehicle.dailyRentalFee }}</td>
+            </tr>
+          </tbody>
         </table>
       </tui-island>
     </div>

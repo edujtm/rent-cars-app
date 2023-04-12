@@ -7,6 +7,7 @@ import { BookingTableComponent } from './components/booking-table/booking-table.
 import { DiscountListComponent } from './components/discount-list/discount-list.component';
 import { BookingService } from './services/booking.service';
 import { VehicleListComponent } from './pages/vehicle-list/vehicle-list.component';
+import { VehicleService } from './services/vehicle.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { VehicleListComponent } from './pages/vehicle-list/vehicle-list.componen
     DiscountListComponent,
     VehicleListComponent,
   ],
-  providers: [BookingService],
+  providers: [BookingService, VehicleService],
   imports: [CommonModule, CarsBookingRoutingModule, SharedModule],
   exports: [CarsBookingRoutingModule],
 })
