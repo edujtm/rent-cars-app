@@ -18,9 +18,7 @@ export class VehicleService {
   constructor(private http: HttpClient) {}
 
   public getVehicles() {
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    this.http.get<Vehicle[]>(`${environment.apiUrl}/vehicles`, { headers }).subscribe((vehicles) => {
+    this.http.get<Vehicle[]>(`${environment.apiUrl}/vehicles`).subscribe((vehicles) => {
       this._vehicles.next(vehicles);
     });
   }

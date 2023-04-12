@@ -29,16 +29,10 @@ export class BookingService {
       return of([]);
     }
 
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    return this.http.get(`${environment.apiUrl}/customers/${customer.Id}/bookings`, { headers });
+    return this.http.get(`${environment.apiUrl}/customers/${customer.Id}/bookings`);
   }
 
   public getCustomers(): Observable<Customer[]> {
-    const token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    return this.http.get<Customer[]>(`${environment.apiUrl}/customers/`, { headers });
+    return this.http.get<Customer[]>(`${environment.apiUrl}/customers/`);
   }
 }
