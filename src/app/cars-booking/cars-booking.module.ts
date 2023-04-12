@@ -6,9 +6,16 @@ import { SharedModule } from '../shared/shared.module';
 import { BookingTableComponent } from './components/booking-table/booking-table.component';
 import { DiscountListComponent } from './components/discount-list/discount-list.component';
 import { BookingService } from './services/booking.service';
+import { VehicleListComponent } from './pages/vehicle-list/vehicle-list.component';
 
 @NgModule({
-  declarations: [CarsBookingPageComponent, BookingTableComponent, DiscountListComponent],
+  declarations: [
+    CarsBookingPageComponent,
+    VehicleListComponent,
+    BookingTableComponent,
+    DiscountListComponent,
+    VehicleListComponent,
+  ],
   providers: [BookingService],
   imports: [CommonModule, CarsBookingRoutingModule, SharedModule],
   exports: [CarsBookingRoutingModule],

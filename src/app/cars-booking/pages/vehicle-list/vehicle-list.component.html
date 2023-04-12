@@ -1,0 +1,31 @@
+<div class="root">
+  <div class="container">
+    <div class="header">
+      <h1 class="logo">Rent Cars</h1>
+
+      <div class="nav-items">
+        <button tuiButton type="button" [routerLink]="'../'">Bookings</button>
+        <button tuiButton type="button" [routerLink]="'.'">Vehicles</button>
+        <button tuiButton type="button" (click)="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="main-section">
+      <tui-island>
+        <h2>Available Vehicles:</h2>
+        <table tuiTable [columns]="columns">
+          <thead>
+            <tr tuiThGroup>
+              <th *tuiHead="'Model'" tuiTh>Model</th>
+
+              <th *tuiHead="'Manufacturer'" tuiTh>Manufacturer</th>
+              <th *tuiHead="'Mileage'" tuiTh>Mileage</th>
+              <th *tuiHead="'Rental Fee'" tuiTh>Rental Fee</th>
+            </tr>
+          </thead>
+          <tbody tuiTbody [data]="[]"></tbody>
+        </table>
+      </tui-island>
+    </div>
+  </div>
+</div>
