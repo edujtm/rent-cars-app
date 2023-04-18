@@ -1,23 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { combineLatest, map, skipWhile } from 'rxjs';
+import { LoadingState } from 'src/app/core/utils/custom-operators';
 import { BookingService, Customer } from '../../services/booking.service';
-
-const FAKE_BOOKINGS = [
-  {
-    from: new Date(2020, 10, 1),
-    to: new Date(2020, 11, 10),
-    status: 'Currently rent',
-    paymentReceived: false,
-    totalFee: 10.0,
-  },
-  {
-    from: new Date(2023, 1, 10),
-    to: new Date(2023, 11, 1),
-    status: 'Currently rent',
-    paymentReceived: true,
-    totalFee: 50.0,
-  },
-];
+import { VehicleService } from '../../services/vehicle.service';
 
 @Component({
   selector: 'app-booking-table',
@@ -25,19 +11,39 @@ const FAKE_BOOKINGS = [
   styleUrls: ['./booking-table.component.scss'],
 })
 export class BookingTableComponent {
-  readonly columns = ['Start Date', 'Final Date', 'Status', 'Payment Received', 'Fee'];
+  readonly columns = ['Start Date', 'Final Date', 'Status', 'Payment Received', 'Fee', 'Car Model'];
 
   customers: Customer[] = [];
   selectedCustomer = new FormControl<Customer | null>(null);
   customerBookings = this.bookingService.customerBookings;
 
-  bookings = FAKE_BOOKINGS;
+  isBookingLoading$ = combineLatest([this.bookingService.bookings, this.vehicleService.vehicles]).pipe(
+    LoadingState.anyIsLoading()
+  );
 
-  constructor(private bookingService: BookingService) {}
+  bookings$ = combineLatest([
+    this.bookingService.customerBookings,
+    this.vehicleService.vehicles$,
+    this.isBookingLoading$,
+  ]).pipe(
+    skipWhile(([_, __, isBookingLoading]) => isBookingLoading),
+    map(([bookings, vehicles, isLoading]) => {
+      console.log('isLoading', isLoading);
+      return bookings.map((booking: any) => {
+        const bookedVehicle = vehicles.find((vehicle) => vehicle.id === booking.vehicleId);
+        console.log('bookedVehicle', bookedVehicle);
+        return { ...booking, bookedVehicle };
+      });
+    })
+  );
+
+  constructor(private bookingService: BookingService, private vehicleService: VehicleService) {}
 
   ngOnInit() {
     this.selectedCustomer.valueChanges.subscribe((customer) => {
       this.bookingService.setCurrentCustomer(customer);
+      this.vehicleService.getVehicles();
+      this.bookingService.getCustomerBookings(customer);
     });
 
     this.bookingService.getCustomers().subscribe((customers) => {

@@ -1,6 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, EMPTY, filter, map, Observable, of, skip, skipWhile, switchMap } from 'rxjs';
+import { LoadingState } from 'src/app/core/utils/custom-operators';
+import { assertIsLoaded, Load, Loadable, Loading } from 'src/app/core/utils/loadable';
+import { Store } from 'src/app/core/utils/store';
 import { environment } from 'src/environments/environment';
 
 export interface Customer {
@@ -11,28 +14,60 @@ export interface Customer {
   Age: number;
 }
 
+interface BookingState {
+  bookings: Loadable<any[]>;
+  customer: Customer | null;
+}
+
+const INITIAL_STATE: BookingState = {
+  customer: null,
+  bookings: Load.start(),
+};
+
 @Injectable()
-export class BookingService {
-  private _currentCustomer = new BehaviorSubject<Customer | null>(null);
-  currentCustomer = this._currentCustomer.asObservable();
+export class BookingService extends Store<BookingState> {
+  currentCustomer = this.select((state) => state.customer);
+  readonly bookings = this.select((state) => state.bookings);
 
-  customerBookings = this.currentCustomer.pipe(switchMap((customer) => this.getCustomerBookings(customer)));
+  readonly customerBookings: Observable<any[]> = this.bookings.pipe(LoadingState.retrieveData());
 
-  constructor(private http: HttpClient) {}
+  readonly isBookingLoading = this.bookings.pipe(LoadingState.isCurrentlyLoading());
 
-  public setCurrentCustomer(customer: Customer | null) {
-    this._currentCustomer.next(customer);
+  readonly errors$ = this.bookings.pipe(LoadingState.retrieveErrors());
+
+  constructor(private http: HttpClient) {
+    super(INITIAL_STATE);
   }
 
-  public getCustomerBookings(customer: Customer | null): Observable<any> {
+  public setCurrentCustomer(customer: Customer | null) {
+    this.update({ customer });
+  }
+
+  public getCustomerBookings(customer: Customer | null) {
     if (customer === null) {
-      return of([]);
+      this.update({ bookings: Load.successful([]) });
+      return;
     }
 
-    return this.http.get(`${environment.apiUrl}/customers/${customer.Id}/bookings`);
+    this.update({ bookings: Load.start() });
+    this.http.get<any[]>(`${environment.apiUrl}/customers/${customer.Id}/bookings`).subscribe({
+      next: (bookings) => {
+        this.update({ bookings: Load.successful(bookings) });
+      },
+      error: (err) => this.update({ bookings: Load.error(err) }),
+    });
   }
 
   public getCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(`${environment.apiUrl}/customers/`);
+  }
+
+  public addBooking(booking: any) {
+    this.update((state) => {
+      return {
+        state,
+        bookings: Load.updateIfLoaded(state.bookings, (bookings) => [...bookings, booking]),
+      };
+    });
   }
 }

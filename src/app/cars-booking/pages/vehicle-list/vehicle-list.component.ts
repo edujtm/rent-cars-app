@@ -11,7 +11,7 @@ import { VehicleService } from '../../services/vehicle.service';
 export class VehicleListComponent {
   readonly columns = ['Model', 'Manufacturer', 'Mileage', 'Rental Fee'];
 
-  vehicles = this.vehicleService.vehicles;
+  vehicles$ = this.vehicleService.vehicles$;
 
   constructor(private authService: AuthService, private router: Router, private vehicleService: VehicleService) {}
 

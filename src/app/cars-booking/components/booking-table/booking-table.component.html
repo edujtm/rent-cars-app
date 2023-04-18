@@ -19,10 +19,11 @@
       <th *tuiHead="'Status'" tuiTh>Status</th>
       <th *tuiHead="'Payment Received'" tuiTh>Payment Received</th>
       <th *tuiHead="'Fee'" tuiTh>Fee</th>
+      <th *tuiHead="'Car Model'" tuiTh>Car Model</th>
     </tr>
   </thead>
-  <tbody tuiTbody [data]="customerBookings | async">
-    <tr *ngFor="let booking of customerBookings | async; let index = index" tuiTr>
+  <tbody tuiTbody [data]="(bookings$ | async) ?? []">
+    <tr *ngFor="let booking of bookings$ | async; let index = index" tuiTr>
       <td *tuiCell="'Start Date'" tuiTd>{{ booking.from | date : 'd/M/yy h:mm' }}</td>
       <td *tuiCell="'Final Date'" tuiTd>{{ booking.to | date : 'd/M/yy h:mm' }}</td>
       <td *tuiCell="'Status'" tuiTd>
@@ -32,6 +33,7 @@
         {{ booking.paymentReceived }}
       </td>
       <td *tuiCell="'Fee'" tuiTd>{{ booking.totalFee }}</td>
+      <td *tuiCell="'Car Model'" tuiTd>{{ booking.bookedVehicle.model }}</td>
     </tr>
   </tbody>
 </table>
