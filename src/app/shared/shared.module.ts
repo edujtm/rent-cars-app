@@ -10,7 +10,7 @@ import {
   TuiLinkModule,
   TuiDataListModule,
   TuiTextfieldControllerModule,
-} from '@taiga-ui/core';
+  } from '@taiga-ui/core';
 import {
   TuiInputModule,
   TuiInputPasswordModule,
